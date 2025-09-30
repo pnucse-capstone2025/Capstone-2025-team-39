@@ -89,10 +89,13 @@
 
 아래 그림은 본 프로젝트의 송신부와 수신부 전체 데이터 흐름을 나타낸다.
 
-![TX Flow Chart](images/fig13_tx_flow.png)
+<img width="728" height="344" alt="fig13_tx_flow" src="https://github.com/user-attachments/assets/f28c842e-36b2-4ca3-96c9-dbcbe0f28827" />
+
+
 *FIG13. 송신부(TX) FLOW CHART*
 
-![RX Flow Chart](images/fig18_rx_flow.png)
+<img width="767" height="261" alt="fig18_rx_flow" src="https://github.com/user-attachments/assets/7c7286cb-d875-497b-b87e-a6524ae45735" />
+
 *FIG18. 수신부(RX) FLOW CHART*
 
 2. **보안 데이터 생성**  
