@@ -165,7 +165,7 @@ cd 저장소이름
 
 ## 6. 소개 자료 및 시연 영상
 ### 6.1. 프로젝트 소개 자료
-https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
+[https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8](https://github.com/pnucse-capstone2025/Capstone-2025-team-39/blob/main/docs/03.%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C/autoshield_presentation.pdf)
 ### 6.2. 시연 영상
 https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
 
