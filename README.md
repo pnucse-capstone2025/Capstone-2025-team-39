@@ -72,6 +72,7 @@
 ## 5. 설치 및 실행 방법
 
 ## 6. 소개 자료 및 시연 영상
+https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
 
 ## 7. 팀 구성
 202029178 홍재왕
