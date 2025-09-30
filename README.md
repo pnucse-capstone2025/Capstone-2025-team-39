@@ -7,7 +7,13 @@
 
 ## 2. 개발 목표
 ### 2.1. 목표 및 세부 내용
-이 프로젝트의 목표는 MATLAB/Simulink 환경에서 CAN-FD 기반 자동차 부품 데이터 전송 시스템을 구축하고, HMAC-SHA256 및 Freshness Counter를 적용하여 위·변조 및 재전송 공격을 모의 검증하는 것입니다. 세부적으로는 송신부(TX)에서 생성된 데이터를 수신부(RX)에서 검증하는 보안 게이트 구조를 구현하고, Ethernet 통신 경로를 병렬로 추가해 다중 프로토콜 환경에서의 보안성을 테스트했습니다.
+본 프로젝트의 궁극적인 목표는 MATLAB/Simulink 환경에서 CAN-FD 기반 자동차 전장부품 데이터 전송 시스템을 설계하고, 여기에 보안 알고리즘(HMAC-SHA256, Freshness Counter)을 적용하여 실제 차량 내부 통신 환경에서 발생할 수 있는 위협을 모의 검증하는 것입니다. 이를 위해 송신 ECU에서 생성된 데이터(AppData, Freshness)가 수신 ECU에서 동일한 MAC 연산을 통해 검증되도록 하여, 데이터 위변조 및 재전송 공격을 차단하고, 정상적으로 인증된 데이터만이 제어 시스템에 입력되는 보안 게이트 구조를 구현합니다.
+
+특히, 본 연구는 CAN-FD 통신의 특성과 제약을 고려하여 무결성 검증(HMAC-SHA256)과 신선도 검증(Freshness Counter)을 동시에 적용하는 메커니즘을 설계함으로써 기존 CAN 환경에서 부족했던 보안성을 강화합니다. 이 과정을 통해 공격 시나리오(위변조, 재전송, MAC 불일치)에 대한 ECU 동작을 실험적으로 검증하고, 보안 모듈의 민감성 및 동기화 필요성을 체계적으로 분석합니다.
+
+또한, 기존의 단일 프로토콜 기반 보안 검증에서 나아가 본 프로젝트는 Ethernet 통신 경로를 병렬로 구현하여 CAN-FD와 함께 운용할 수 있는 시뮬레이션 환경을 마련합니다. Ethernet 기반 전송은 고속·대용량 데이터 처리에 강점을 가지는 반면, 외부 네트워크와의 연결로 보안 위협이 크다는 특성을 지닙니다. 따라서 본 연구에서는 CAN-FD와 Ethernet 경로를 동시에 모델링하고 동일한 보안 알고리즘을 병렬 적용하여, 차세대 차량 네트워크에서의 다중 프로토콜 환경 보안성 검증을 목표로 합니다.
+
+결국 본 프로젝트는 Simulink 시뮬레이션 환경에서 CAN-FD와 Ethernet을 통합한 보안 프레임워크를 제시하고, 이를 통해 다양한 보안 알고리즘의 적용 가능성을 실험적으로 검토함으로써 향후 자율주행차 및 커넥티드카 환경에서 신뢰성 높은 ECU 보안 구조를 구현할 수 있는 기반을 마련하고자 합니다.
 
 ### 2.2. 기존 서비스 대비 차별성
 기존의 단일 프로토콜 기반 연구와 달리, 이 프로젝트는 CAN-FD와 Ethernet 경로를 병렬로 구현하여 두 통신 환경을 동시에 시뮬레이션하고 검증할 수 있습니다. 또한, 단순한 시뮬레이션에 그치지 않고, MATLAB App Designer로 UI를 설계하여 보안 검증 결과를 직관적으로 시각화하고, 사용자가 직접 공격 시나리오를 제어할 수 있는 실험적 환경을 제공합니다.
@@ -24,17 +30,37 @@
 - 수신부 (RX): ABSECU 역할을 수행하며, 수신된 프레임에서 데이터를 분리한 후 MAC과 Freshness를 검증합니다. 검증에 성공한 데이터만 ECU 로직으로 전달하는 Fail-Safe 구조를 구현합니다.
 
 ### 3.2. 사용 기술
+3.2.1 개발 환경
+(1) MATLAB/Simulink
+	ㄱ. 자동차 전장부품(Brake ECU, Dashboard ECU 등) 모델링
+	ㄴ. CAN-FD 및 Ethernet 통신 시뮬레이션
+	ㄷ. Vehicle Network Toolbox활용 CAN-FD Pack/Unpack, UDP/TCP 전송 모델링
+	ㄹ. 보안 알고리즘(HMAC-SHA256, Freshness Counter) 삽입 및 검증 환경 구축
+  
+(2) VS Code
+	ㄱ. MATLAB 스크립트와 일부 보안 알고리즘 테스트 코드 관리
+  
+(3) MATLAB App Designer
+	ㄱ. UI 설계(보안 알고리즘 선택, 시뮬레이션 결과 시각화)
+  
+3.2.2 사용 언어
+(1) MATLAB: Simulink 모델링, CAN-FD/Ethernet 통신, 보안 알고리즘 구현 및 결과 분석
 
-- 개발 환경: MATLAB/Simulink, VS Code, MATLAB App Designer 
+(2) Python 3.10: 보조적 알고리즘 검증, 데이터 분석, 시각화
 
-- 사용 언어: MATLAB, Python 3.10 
-
-- 주요 기술: 
-  - 통신: Vehicle Network Toolbox를 활용한 CAN-FD 통신 , UDP/TCP 블록을 활용한 Ethernet 통신 
-
-  - 보안: HMAC-SHA256 기반 무결성 검증, Freshness Counter 기반 재전송 공격 방어 
-
-  - 시각화: MATLAB App Designer, Scope/Display 블록 
+3.2.3 사용 기술
+(1) 통신 및 보안
+	ㄱ. Vehicle Network Toolbox: CAN-FD 프레임 생성, ECU 간 통신 모델링
+	ㄴ. Instrument Control Toolbox: UDP/TCP 블록 활용 → Ethernet 통신 경로 구현
+	ㄷ. 보안 알고리즘: HMAC-SHA256 기반 무결성 검증, Freshness Counter 기반 리플레이 공격 방어
+  
+(2) UI 및 시각화
+	ㄱ. MATLAB App Designer: 알고리즘 선택, 시뮬레이션 결과(무결성, Freshness, 지연) 시각화
+	ㄴ. Scope/Display 블록: ECU 출력값과 보안 검증 결과 모니터링
+  
+(3) 배포 및 환경 관리
+	ㄱ. Docker(선택적): MATLAB Runtime 기반 컨테이너 환경에서 Simulink 실행 가능성 검토
+	ㄴ. GitHub: Simulink 모델 및 코드 관리, 버전 관리
 
 ## 4. 개발 결과
 ### 4.1. 전체 시스템 흐름도
