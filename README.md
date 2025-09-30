@@ -82,8 +82,16 @@ https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
 202055555 석재영
 
 ## 8. 참고 문헌 및 출처
-
-
+[1] R. Bosch GmbH, CAN Specification Version 2.0, Stuttgart, Germany, 1991.
+[2] ISO 11898-1, Road vehicles — Controller area network (CAN) — Part 1: Data link layer and physical signalling, International Organization for Standardization, Geneva, Switzerland, 2015.
+[3] ISO 11898-7, Road vehicles — Controller area network (CAN) — Part 7: CAN FD data link layer specification, International Organization for Standardization, Geneva, Switzerland, 2015.
+[4] MathWorks, Vehicle Network Toolbox Documentation: Simulink Support for CAN FD and Ethernet, MathWorks Inc., Natick, MA, USA, 2023. [Online]. Available: https://www.mathworks.com/help/vnt/
+[5] M. Wolf, A. Weimerskirch, and C. Paar, "Security in Automotive Bus Systems," Proceedings of the Workshop on Embedded Security in Cars (ESCAR), pp. 1-12, 2004.
+[6] C. Miller and C. Valasek, "Remote Exploitation of an Unaltered Passenger Vehicle," Black Hat USA, pp. 1-91, Aug. 2015.
+[7] FIPS PUB 180-4, Secure Hash Standard (SHS), Federal Information Processing Standards Publication, National Institute of Standards and Technology (NIST), Gaithersburg, MD, 2015.
+[8] H. Krawczyk, M. Bellare, and R. Canetti, "HMAC: Keyed-Hashing for Message Authentication," RFC 2104, Internet Engineering Task Force (IETF), Feb. 1997.
+[9] H. Kopetz, Real-Time Systems: Design Principles for Distributed Embedded Applications, Springer, 2011.
+[10] MathWorks, MATLAB Function Blocks and Code Generation for Embedded Systems, MathWorks Inc., Natick, MA, USA, 2023. [Online]. Available: https://www.mathworks.com/help/simulink/ug/matlab-function-block.html
 
 
 
