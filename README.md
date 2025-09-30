@@ -31,36 +31,51 @@
 
 ### 3.2. 사용 기술
 3.2.1 개발 환경
-(1) MATLAB/Simulink
-	ㄱ. 자동차 전장부품(Brake ECU, Dashboard ECU 등) 모델링
-	ㄴ. CAN-FD 및 Ethernet 통신 시뮬레이션
-	ㄷ. Vehicle Network Toolbox활용 CAN-FD Pack/Unpack, UDP/TCP 전송 모델링
-	ㄹ. 보안 알고리즘(HMAC-SHA256, Freshness Counter) 삽입 및 검증 환경 구축
-  
-(2) VS Code
-	ㄱ. MATLAB 스크립트와 일부 보안 알고리즘 테스트 코드 관리
-  
-(3) MATLAB App Designer
-	ㄱ. UI 설계(보안 알고리즘 선택, 시뮬레이션 결과 시각화)
-  
-3.2.2 사용 언어
-(1) MATLAB: Simulink 모델링, CAN-FD/Ethernet 통신, 보안 알고리즘 구현 및 결과 분석
 
-(2) Python 3.10: 보조적 알고리즘 검증, 데이터 분석, 시각화
+MATLAB/Simulink
+
+자동차 전장부품(Brake ECU, Dashboard ECU 등) 모델링
+
+CAN-FD 및 Ethernet 통신 시뮬레이션
+
+Vehicle Network Toolbox 활용: CAN-FD Pack/Unpack, UDP/TCP 전송 모델링
+
+보안 알고리즘(HMAC-SHA256, Freshness Counter) 삽입 및 검증 환경 구축
+
+VS Code
+
+MATLAB 스크립트와 일부 보안 알고리즘 테스트 코드 관리
+
+MATLAB App Designer
+
+UI 설계(보안 알고리즘 선택, 시뮬레이션 결과 시각화)
+
+3.2.2 사용 언어
+
+MATLAB: Simulink 모델링, CAN-FD/Ethernet 통신, 보안 알고리즘 구현 및 결과 분석
+
+Python 3.10: 보조적 알고리즘 검증, 데이터 분석, 시각화
 
 3.2.3 사용 기술
 (1) 통신 및 보안
-	ㄱ. Vehicle Network Toolbox: CAN-FD 프레임 생성, ECU 간 통신 모델링
-	ㄴ. Instrument Control Toolbox: UDP/TCP 블록 활용 → Ethernet 통신 경로 구현
-	ㄷ. 보안 알고리즘: HMAC-SHA256 기반 무결성 검증, Freshness Counter 기반 리플레이 공격 방어
-  
+
+Vehicle Network Toolbox: CAN-FD 프레임 생성, ECU 간 통신 모델링
+
+Instrument Control Toolbox: UDP/TCP 블록 활용 → Ethernet 통신 경로 구현
+
+보안 알고리즘: HMAC-SHA256 기반 무결성 검증, Freshness Counter 기반 리플레이 공격 방어
+
 (2) UI 및 시각화
-	ㄱ. MATLAB App Designer: 알고리즘 선택, 시뮬레이션 결과(무결성, Freshness, 지연) 시각화
-	ㄴ. Scope/Display 블록: ECU 출력값과 보안 검증 결과 모니터링
-  
+
+MATLAB App Designer: 알고리즘 선택, 시뮬레이션 결과(무결성, Freshness, 지연) 시각화
+
+Scope/Display 블록: ECU 출력값과 보안 검증 결과 모니터링
+
 (3) 배포 및 환경 관리
-	ㄱ. Docker(선택적): MATLAB Runtime 기반 컨테이너 환경에서 Simulink 실행 가능성 검토
-	ㄴ. GitHub: Simulink 모델 및 코드 관리, 버전 관리
+
+Docker(선택적): MATLAB Runtime 기반 컨테이너 환경에서 Simulink 실행 가능성 검토
+
+GitHub: Simulink 모델 및 코드 관리, 버전 관리
 
 ## 4. 개발 결과
 ### 4.1. 전체 시스템 흐름도
