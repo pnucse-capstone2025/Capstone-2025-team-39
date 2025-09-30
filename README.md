@@ -79,23 +79,50 @@
 - GitHub: Simulink 모델 및 코드 관리, 버전 관리
 
 ## 4. 개발 결과
-### 4.1. 전체 시스템 흐름도
-시스템은 다음과 같은 단계로 진행됩니다.
+### 4.1 전체 시스템 흐름도
 
-1. 센서 데이터 생성: 송신부에서 브레이크 페달의 원시 데이터(Raw)와 눌림 여부(Pressed)를 생성합니다.
+본 시스템은 차량 내 ECU 간의 보안 통신을 Simulink 환경에서 모델링하고, CAN-FD와 Ethernet 경로를 병렬로 구현하여 다양한 공격 시나리오에 대응할 수 있는 구조를 설계하였다. 전체적인 데이터 흐름과 처리 단계는 아래와 같다.
 
-2. 보안 데이터 생성: Raw, Pressed 데이터와 Freshness Counter 값을 이용해 HMAC-SHA256 기반 MAC을 생성합니다.
+1. **센서 데이터 생성**  
+   - 송신부(TX ECU)에서 브레이크 페달의 **원시 데이터(Raw)** 와 **눌림 여부(Pressed)** 신호를 생성한다.  
+   - 이 데이터는 이후 보안 모듈 입력으로 전달된다.
 
-3. 데이터 전송: 생성된 데이터와 MAC을 CAN-FD와 Ethernet(UDP) 프레임에 담아 병렬로 전송합니다.
+아래 그림은 본 프로젝트의 송신부와 수신부 전체 데이터 흐름을 나타낸다.
 
-4. 데이터 수신: 수신부에서 CAN-FD 및 UDP를 통해 데이터를 수신합니다.
+![TX Flow Chart](images/fig13_tx_flow.png)
+*FIG13. 송신부(TX) FLOW CHART*
 
-5. 보안 검증: 수신된 데이터의 MAC과 Freshness Counter를 검증합니다.
+![RX Flow Chart](images/fig18_rx_flow.png)
+*FIG18. 수신부(RX) FLOW CHART*
 
-6. Fail-Safe 처리: 검증에 성공한 데이터만 ECU 로직으로 전달하고, 실패 시 데이터 흐름을 차단합니다.
+2. **보안 데이터 생성**  
+   - Raw 데이터와 Pressed 데이터에 **Freshness Counter** 값을 결합한다.  
+   - 해당 값을 입력으로 하여 **HMAC-SHA256 기반 MAC(Message Authentication Code)** 을 생성한다.  
+   - 이 과정을 통해 무결성과 신선도를 동시에 확보한다.
 
-7. 결과 시각화: Lamp, Gauge 등 UI를 통해 검증 성공/실패 여부를 직관적으로 표시합니다.
+3. **데이터 전송**  
+   - 생성된 데이터(AppData, Pressed, Freshness, MAC)를  
+     - **CAN-FD 프레임(최대 64 Byte)**  
+     - **Ethernet(UDP 기반 PDU)**  
+     두 개의 경로에 병렬로 담아 전송한다.  
+   - CAN-FD는 실시간성과 호환성을, Ethernet은 고속·대용량 전송을 담당한다.
 
+4. **데이터 수신**  
+   - 수신부(RX ECU)는 두 개의 경로(CAN-FD / UDP)를 통해 데이터를 수신한다.  
+   - Vehicle Network Toolbox(CAN Unpack) 및 Instrument Control Toolbox(UDP Receive)를 통해 패킷을 해석한다.
+
+5. **보안 검증**  
+   - 수신 ECU는 동일한 **HMAC-SHA256 연산**을 수행하여 송신부에서 생성된 MAC과 비교한다.  
+   - 동시에 Freshness Counter 값의 증가 여부를 확인하여 **리플레이 공격 여부**를 판단한다.
+
+6. **Fail-Safe 처리**  
+   - 검증에 **성공한 데이터만** ECU 로직으로 전달된다.  
+   - 검증에 실패한 데이터(위·변조, 재전송 등)는 즉시 차단하여 시스템에 반영되지 않도록 한다.
+
+7. **결과 시각화**  
+   - **Lamp**: 데이터 검증 성공/실패를 색상으로 표시 (예: Green=정상, Red=실패).  
+   - **Gauge**: Brake Force 값을 실시간으로 시각화하여 운전자의 제동 상태를 확인할 수 있다.  
+   - **UI(App Designer 연동)**: 시뮬레이션 결과를 직관적으로 표시하고, 알고리즘별 성능 비교가 가능하다.
 ### 4.2. 기능 설명 및 주요 기능 명세서
 |기능|입력|출력|설명|
 |-----|---|---|---|
