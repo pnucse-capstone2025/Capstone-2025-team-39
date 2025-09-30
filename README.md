@@ -164,6 +164,9 @@ cd 저장소이름
 
 
 ## 6. 소개 자료 및 시연 영상
+### 6.1. 프로젝트 소개 자료
+https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
+### 6.2. 시연 영상
 https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
 
 ## 7. 팀 구성
