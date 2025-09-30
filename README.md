@@ -30,7 +30,7 @@
 - 수신부 (RX): ABSECU 역할을 수행하며, 수신된 프레임에서 데이터를 분리한 후 MAC과 Freshness를 검증합니다. 검증에 성공한 데이터만 ECU 로직으로 전달하는 Fail-Safe 구조를 구현합니다.
 
 ### 3.2. 사용 기술
-3.2.1 개발 환경
+2.5.1 개발 환경
 
 MATLAB/Simulink
 
@@ -50,13 +50,13 @@ MATLAB App Designer
 
 UI 설계(보안 알고리즘 선택, 시뮬레이션 결과 시각화)
 
-3.2.2 사용 언어
+2.5.2 사용 언어
 
 MATLAB: Simulink 모델링, CAN-FD/Ethernet 통신, 보안 알고리즘 구현 및 결과 분석
 
 Python 3.10: 보조적 알고리즘 검증, 데이터 분석, 시각화
 
-3.2.3 사용 기술
+2.5.3 사용 기술
 (1) 통신 및 보안
 
 Vehicle Network Toolbox: CAN-FD 프레임 생성, ECU 간 통신 모델링
