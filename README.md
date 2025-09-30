@@ -112,6 +112,55 @@
 - 역할 분담 구체화: 멘토링에서 긍정적으로 평가받은 역할 분담 체계를 유지하면서 **Ethernet 및 TLS 관련 보안 기능(홍재왕), CAN-FD 기반 통신 및 Freshness 검증(석재영), UI 개발 및 워크플로우 설계(레퐁푸)**로 세부 작업을 명확히 구분했습니다.
 
 ## 5. 설치 및 실행 방법
+### 5.1. 설치절차 및 실행 방법
+(1) 사전 준비
+
+- MATLAB R2023b 이상, Simulink 설치 필요
+
+- Vehicle Network Toolbox, Instrument Control Toolbox 설치 필요
+
+- (선택) Docker Desktop 설치 후 MATLAB Runtime 환경 구성 가능
+
+(2) 프로젝트 다운로드
+
+git clone https://github.com/사용자이름/저장소이름.git
+cd 저장소이름
+
+
+(3) Simulink 모델 실행
+
+- MATLAB 실행 → project.slx (예: CAN_FD_Security.slx) 열기
+
+- 상단 툴바에서 Run 버튼 클릭
+
+- App Designer UI(security_UI.mlapp) 실행 시 알고리즘 선택 및 결과 시각화 가능
+
+(4) 포트 정보
+
+- CAN-FD: Simulink 내부 가상 네트워크 환경 기반
+
+- Ethernet(UDP): 기본 포트 5000 사용 (필요 시 UDP Send / UDP Receive 블록 속성에서 수정 가능)
+
+5.2. 오류 발생 시 해결 방법
+
+(1) Toolbox 누락 오류
+
+- 오류 메시지에 Unrecognized block 발생 시 → Add-On Explorer에서 해당 Toolbox 설치
+
+- 예: Vehicle Network Toolbox, Instrument Control Toolbox
+
+(2) 포트 충돌 오류 (UDP)
+
+- Port already in use 오류 발생 시 → 다른 포트(예: 6000)로 변경 후 재실행
+
+(3) 보안 알고리즘 오류
+
+- HMAC-SHA256 연산 불일치 발생 시 → 송신부/수신부의 Key 및 Freshness Counter 초기값이 동일한지 확인
+
+(4) Docker 실행 오류 (선택적 환경)
+
+- MATLAB Runtime 이미지 버전 불일치 시 → docker pull mathworks/matlab-runtime:r2023b 명령어로 최신 이미지 다운로드
+
 
 ## 6. 소개 자료 및 시연 영상
 https://youtu.be/P9r13Io3QSs?si=FCTwgvSGJHzuFtQ8
